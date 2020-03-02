@@ -55,6 +55,25 @@ Configuration element | Description
 --------------------- | -----------
 alertmanager_url | (Mandatory) URL of the exported alertmanager api (eg: "http://localhost:9093/")
 
+## Docker image
+
+You can run images published in [dockerhub](https://hub.docker.com/r/fxinnovation/alertmanager-silences-exporter).
+
+You can also build a docker image using:
+
+```bash
+make docker
+```
+
+The resulting image is named `fxinnovation/alertmanager-silences-exporter:<git-branch>`.
+
+The image exposes port 9666 and expects a config in `/opt/alertmanager-silences-exporter/config.yml`.
+To configure it, you can pass the environment variables, and bind-mount a config from your host:
+
+```bash
+docker run -p 9666:9666 -v /path/on/host/config/config.yml:/opt/alertmanager-silences-exporter/config/config.yml -e ALERTMANAGER_URL="http://localhost:9093/" fxinnovation/alertmanager-silences-exporter:<git-branch>
+```
+
 ## Exposed metrics
 
 Metric | Description
